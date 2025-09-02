@@ -46,10 +46,25 @@ jobs:
   e2e-tests:
     runs-on: ubuntu-latest
     needs: unit-tests
+    
+    services:
+      mongodb:
+        image: mongo:7.0
+        env:
+          MONGO_INITDB_ROOT_USERNAME: admin
+          MONGO_INITDB_ROOT_PASSWORD: password123
+        ports:
+          - 27017:27017
+        options: >-
+          --health-cmd "mongosh --eval 'db.adminCommand(\"ping\")'"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     env:
-      mongoUrl: ${{ secrets.MONGO_URI }}
-      jwtSecret: ${{ secrets.JWT_SECRET }}
-      jwtExpiry: ${{ secrets.JWT_EXPIRES_IN }}
+      MONGO_URI: mongodb://admin:password123@localhost:27017/test?authSource=admin
+      JWT_SECRET: ${{ secrets.JWT_SECRET }}
+      JWT_EXPIRES_IN: ${{ secrets.JWT_EXPIRES_IN }}
       PORT: ${{ secrets.PORT }}
 
     steps:
