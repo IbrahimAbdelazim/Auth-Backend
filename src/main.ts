@@ -24,14 +24,14 @@ async function bootstrap() {
 
   const config = new DocumentBuilder()
     .setTitle('Task API')
-    .setDescription('Simple Auth API using NestJS + Mongo + JWT')
+    .setDescription('Task API using NestJS + Mongo')
     .setVersion('1.0')
     .addBearerAuth()
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
 
-  SwaggerModule.setup('api', app, document);
+  SwaggerModule.setup('api-docs', app, document);
 
   await app.listen(process.env.PORT ?? 3000);
 }
