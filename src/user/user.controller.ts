@@ -1,7 +1,7 @@
 import { Controller, Get, UseGuards } from '@nestjs/common';
 import { UserService } from './user.service';
-import { JwtAuthGuard } from 'src/auth/guard/jwt-auth.guard';
-import { GetUser } from 'src/auth/decorator/get-user.decorator';
+import { JwtAuthGuard } from '../auth/guard/jwt-auth.guard';
+import { GetUser } from '../auth/decorator/get-user.decorator';
 import { ApiBearerAuth } from '@nestjs/swagger';
 import { UserType } from './user.schema';
 
