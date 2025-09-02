@@ -17,7 +17,7 @@ export class UserService {
     email: string,
     selectPassword = false,
   ): Promise<UserType | null> {
-    const query = this.userModel.findOne({ email });
+    const query = this.userModel.findOne({ email: email.toLowerCase() });
     if (!selectPassword) {
       query.select('-password');
     }
