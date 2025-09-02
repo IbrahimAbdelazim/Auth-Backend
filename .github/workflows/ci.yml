@@ -21,24 +21,21 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
-          cache-dependency-path: backend/package-lock.json
+          cache-dependency-path: package-lock.json
 
       - name: Install dependencies
-        working-directory: backend
         run: npm ci
 
       - name: Run linting
-        working-directory: backend
         run: npm run lint
 
       - name: Run unit tests
-        working-directory: backend
         run: npm test -- --coverage --watchAll=false
 
       - name: Upload coverage reports
         uses: codecov/codecov-action@v3
         with:
-          file: backend/coverage/lcov.info
+          file: coverage/lcov.info
           flags: unittests
           name: codecov-umbrella
           fail_ci_if_error: false
@@ -76,12 +73,10 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
-          cache-dependency-path: backend/package-lock.json
+          cache-dependency-path: package-lock.json
 
       - name: Install dependencies
-        working-directory: backend
         run: npm ci
 
       - name: Run end-to-end tests
-        working-directory: backend
         run: npm run test:e2e
